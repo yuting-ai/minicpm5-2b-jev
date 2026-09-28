@@ -7,7 +7,7 @@
 
 **`MiniCPM5-2B-Jev`** is an open-source, single-pass, calibrated **System 1 Decision Model** built on OpenBMB's [`MiniCPM5-2B`](https://github.com/OpenBMB/MiniCPM) (weights on [Hugging Face](https://huggingface.co/ytbai/MiniCPM5-2B-Jev)). Given a shared context document (`state`) and a dictionary of typed decision questions (`choice`, `noul`, `score`), it returns a calibrated probability distribution over the options for every question in **one forward pass** — without autoregressive text generation.
 
-It natively serves the `/v1/systemone` structured decision contract and ranks **#1 among all $\le 2\text{B}$ parameter open-weight System 1 / Jev models on `JevBench` (78.79%)**, outperforming `decider-2b v11` (76.2%), `Kev-4B` (75.8%), `system-one Qwen3-8B` (71.9%), and `Bespoke Nimble 9B` (67.5%), while achieving **86.41% accuracy and 0.0307 ECE** on the 10-source `decision-v7` benchmark.
+It natively serves the `/v1/systemone` structured decision contract and ranks **#1 among all ≤ 2B parameter open-weight System 1 / Jev models on `JevBench` (78.79%)**, outperforming `decider-2b v11` (76.2%), `Kev-4B` (75.8%), `system-one Qwen3-8B` (71.9%), and `Bespoke Nimble 9B` (67.5%), while achieving **86.41% accuracy and 0.0307 ECE** on the 10-source `decision-v7` benchmark.
 
 ---
 
@@ -37,7 +37,7 @@ Evaluated on the official [`fstandhartinger/jevbench`](https://github.com/fstand
 
 ### 1.2 `decision-v7` 10-Source Typed Decision Benchmark
 
-| Model | Base Model | Params | Accuracy ($\uparrow$) | Brier Score ($\downarrow$) | ECE ($\downarrow$) |
+| Model | Base Model | Params | Accuracy (↑) | Brier Score (↓) | ECE (↓) |
 | :--- | :--- | :---: | :---: | :---: | :---: |
 | Kev-9B *(T=2.30)* | Qwen3.5-9B-Base | 9.0B | 87.2% | — | 0.042 |
 | Kev-27B *(T=1.38)* | Qwen3.8-27B | 27.0B | 87.0% | — | — |
@@ -49,15 +49,18 @@ Evaluated on the official [`fstandhartinger/jevbench`](https://github.com/fstand
 
 ### 1.3 All 7 Benchmark Suites Summary (`MiniCPM5-2B-Jev`)
 
-| Benchmark Suite | States / Questions | Stage 1 (Top-20 LoRA) | **MiniCPM5-2B-Jev (Ours)** | Choice Acc | Noul Acc | Score Acc | Brier ($\downarrow$) | ECE ($\downarrow$) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **`decision-v7` (10-Source Stratified)** | 300 / 390 | 71.03% | **86.41%** | 87.10% | 94.97% | 67.11% | 0.2143 | **0.0307** |
-| **`jabr v1` (8 Tasks / 78 Cases)** | 78 / 78 | 70.51% | **87.18%** | 96.00% | 76.92% | 88.89% | 0.1771 | **0.0277** |
-| **`jabr v2` (49 Tasks / 869 Cases)** | 869 / 869 | 69.51% | **79.75%** | 85.16% | 79.49% | 69.95% | 0.2919 | **0.0663** |
-| **`JevBench` (Overall Public Suite)** | 231 / 231 | 60.17% | **78.79%** | 78.42% | 81.08% | 72.22% | 0.3157 | **0.0699** |
-| **`hard-v1` (Held-Out Template 4)** | 350 / 543 | 48.43% | **60.41%** | 58.35% | 70.43% | 40.00% | 0.5419 | **0.0603** |
-| **`DecisionBench Medium`** | 80 / 293 | 49.15% | **60.07%** | 70.93% | 80.52% | 34.48% | 0.6596 | 0.2647 |
-| **`DecisionBench Hard`** | 80 / 293 | 46.76% | **44.71%** | 53.75% | 70.79% | 23.33% | 0.8768 | 0.3711 |
+| Benchmark Suite | States / Questions | Accuracy | Choice Acc | Noul Acc | Score Acc | Brier (↓) | ECE (↓) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **`decision-v7` (10-Source Stratified)** | 300 / 390 | **86.41%** | 87.10% | 94.97% | 67.11% | 0.2143 | **0.0307** |
+| **`jabr v1` (8 Tasks / 78 Cases)** | 78 / 78 | **87.18%** | 96.00% | 76.92% | 88.89% | 0.1771 | **0.0277** |
+| **`jabr v2` (49 Tasks / 869 Cases)** | 869 / 869 | **79.75%** | 85.16% | 79.49% | 69.95% | 0.2919 | **0.0663** |
+| **`JevBench` (Overall Public Suite)** | 231 / 231 | **78.79%** | 78.42% | 81.08% | 72.22% | 0.3157 | **0.0699** |
+| ↳ *JevBench Easy Tier* | 48 / 48 | **97.92%** | — | — | — | — | — |
+| ↳ *JevBench Standard/Original Tier* | 72 / 72 | **94.44%** | — | — | — | — | — |
+| ↳ *JevBench Hard Tier* | 111 / 111 | **60.36%** | — | — | — | — | — |
+| **`hard-v1` (Held-Out Template 4)** | 350 / 543 | **60.41%** | 58.35% | 70.43% | 40.00% | 0.5419 | **0.0603** |
+| **`DecisionBench Medium`** | 80 / 293 | **60.07%** | 70.93% | 80.52% | 34.48% | 0.6596 | 0.2647 |
+| **`DecisionBench Hard`** | 80 / 293 | **44.71%** | 53.75% | 70.79% | 23.33% | 0.8768 | 0.3711 |
 
 ---
 
@@ -65,14 +68,14 @@ Evaluated on the official [`fstandhartinger/jevbench`](https://github.com/fstand
 
 1. **Native `lm_head` Letter Readout (`LetterReadoutHead`)**:
    - Extracts the 255 single-token option letter embeddings (`A..Z` for `0..25`, `AA..` for `26..254`, shape `[255, 2304]`) directly from `MiniCPM5-2B`'s pretrained `lm_head.weight`.
-   - Formats each question branch as `Question: [{type}] {instructions}\n(A) {opt_0}\n(B) {opt_1}\n...\nAnswer: (` and reads out the last-token hidden state $h_{\text{last}}$ at `(`.
+   - Formats each question branch as `Question: [{type}] {instructions}\n(A) {opt_0}\n(B) {opt_1}\n...\nAnswer: (` and reads out the last-token hidden state `h_last` (dimension 2304) at `(`.
    - Applies **Class-Balanced Marginal Prior Debiasing** (`noul_bias`, `choice_k_bias`, `score_k_bias`) and **Per-Type Temperature Scaling** (`choice: 1.1314`, `noul: 1.2338`, `score: 0.4213`), stored directly inside `head.pt`.
 2. **Shared-Prefix KV-Cache Multi-Question Branching**:
-   - When multiple questions share a long `state` ($\ge 256$ tokens), the model encodes `State: {state}\n\n` once with `use_cache=True`, then evaluates each question branch $q_m$ by reusing the cached key-value tensors and calling `pkv.crop(-len(br_m))` after each branch.
+   - When multiple questions share a long `state` (≥ 256 tokens), the model encodes `State: {state}\n\n` once with `use_cache=True`, then evaluates each question branch `q_m` by reusing the cached key-value tensors and calling `pkv.crop(-len(br_m))` after each branch.
    - Guarantees **exact mathematical isolation** across questions in the same request: adding or reordering sibling questions never changes another question's probability distribution.
 3. **All-42-Layer LoRA + Hybrid Proper Scoring Rule Loss**:
    - Attaches LoRA (`r=16, lora_alpha=32, lora_dropout=0.0`) to all 42 Transformer layers across all 7 linear projections (`q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj`, ~25.3M trainable parameters).
-   - Trained with a composite proper scoring rule combining KL divergence ($\text{KL}(p_{\text{target}} \,\|\, p_\theta)$), Brier score ($0.25 \cdot \|p_\theta - p_{\text{target}}\|_2^2$), and an ordinal distance penalty ($0.15 \cdot \mathbb{E}[|i - y| / (K-1)]$) for `score` rubrics.
+   - Trained with a composite proper scoring rule combining KL divergence, Brier score (`0.25 * ||p_theta - p_target||_2^2`), and an ordinal distance penalty (`0.15 * E[|i - y| / (K - 1)]`) for `score` rubrics.
 
 ---
 
@@ -97,8 +100,7 @@ github-MiniCPM5-2B-Jev/
 │       ├── checkpoint_meta.json       # Calibration & validation metadata
 │       └── benchmark_results.json     # Full evaluation results on all 7 suites
 ├── benchmarks/
-│   ├── stage2_results.json            # MiniCPM5-2B-Jev evaluation metrics
-│   ├── stage1_results.json            # Stage 1 (top-20 layer LoRA) baseline metrics
+│   ├── stage2_results.json            # Full 7-suite benchmark evaluation metrics
 │   ├── training_history.json          # Step 0 -> Step 800 training & calibration log
 │   └── dataset_stats.json             # Statistics of the 5-pool jev_s1_clean_v2 dataset
 └── data/
