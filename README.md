@@ -1,10 +1,11 @@
 # MiniCPM5-2B-Jev
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Base Model](https://img.shields.io/badge/Base_Model-openbmb%2FMiniCPM5--2B-green)](https://huggingface.co/openbmb/MiniCPM5-2B)
+[![Base Model](https://img.shields.io/badge/Base_Model-OpenBMB%2FMiniCPM-2BA02C?logo=github)](https://github.com/OpenBMB/MiniCPM)
+[![Hugging Face Weights](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-ytbai%2FMiniCPM5--2B--Jev-yellow)](https://huggingface.co/ytbai/MiniCPM5-2B-Jev)
 [![Contract](https://img.shields.io/badge/API-%2Fv1%2Fsystemone-orange)](#43-http-server-v1systemone)
 
-**`MiniCPM5-2B-Jev`** is an open-source, single-pass, calibrated **System 1 Decision Model** built on [`openbmb/MiniCPM5-2B`](https://huggingface.co/openbmb/MiniCPM5-2B). Given a shared context document (`state`) and a dictionary of typed decision questions (`choice`, `noul`, `score`), it returns a calibrated probability distribution over the options for every question in **one forward pass** — without autoregressive text generation.
+**`MiniCPM5-2B-Jev`** is an open-source, single-pass, calibrated **System 1 Decision Model** built on OpenBMB's [`MiniCPM5-2B`](https://github.com/OpenBMB/MiniCPM) (weights on [Hugging Face](https://huggingface.co/ytbai/MiniCPM5-2B-Jev)). Given a shared context document (`state`) and a dictionary of typed decision questions (`choice`, `noul`, `score`), it returns a calibrated probability distribution over the options for every question in **one forward pass** — without autoregressive text generation.
 
 It natively serves the `/v1/systemone` structured decision contract and ranks **#1 among all $\le 2\text{B}$ parameter open-weight System 1 / Jev models on `JevBench` (78.79%)**, outperforming `decider-2b v11` (76.2%), `Kev-4B` (75.8%), `system-one Qwen3-8B` (71.9%), and `Bespoke Nimble 9B` (67.5%), while achieving **86.41% accuracy and 0.0307 ECE** on the 10-source `decision-v7` benchmark.
 
