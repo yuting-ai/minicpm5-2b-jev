@@ -1,0 +1,54 @@
+{
+  "base_model": "openbmb/MiniCPM5-2B",
+  "lora_r": 16,
+  "lora_targets": "all",
+  "top_k_layers": 0,
+  "head_dim": 256,
+  "readout": "native_lm_head_letters_pride",
+  "temperature": 1.1314,
+  "type_temperatures": {
+    "choice": 1.1314,
+    "noul": 1.2338,
+    "score": 0.4213
+  },
+  "opt_step": 700,
+  "val_acc": 0.8013,
+  "calibration": {
+    "fitted_temperature": 1.1314,
+    "type_temperatures": {
+      "choice": 1.1314,
+      "noul": 1.2338,
+      "score": 0.4213
+    },
+    "raw": {
+      "n_questions": 297,
+      "acc": 0.8013,
+      "choice_acc": 0.7684,
+      "noul_acc": 0.8587,
+      "score_acc": 0.8214,
+      "v7_10source_acc": 0.9091,
+      "hard_v1_acc": 0.5741,
+      "pool5_acc": 0.9505,
+      "nll": 0.4587,
+      "brier": 0.2574,
+      "ece": 0.0355,
+      "mean_conf": 0.8271,
+      "confident_error_rate": 0.0236
+    },
+    "calibrated": {
+      "n_questions": 297,
+      "acc": 0.8013,
+      "choice_acc": 0.7684,
+      "noul_acc": 0.8587,
+      "score_acc": 0.8214,
+      "v7_10source_acc": 0.9091,
+      "hard_v1_acc": 0.5741,
+      "pool5_acc": 0.9505,
+      "nll": 0.4444,
+      "brier": 0.2532,
+      "ece": 0.0242,
+      "mean_conf": 0.821,
+      "confident_error_rate": 0.0135
+    }
+  }
+}

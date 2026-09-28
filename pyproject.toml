@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minicpm5-2b-jev"
+version = "0.2.0"
+description = "MiniCPM5-2B-Jev: Single-Pass Calibrated System 1 Decision Model (/v1/systemone)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "torch>=2.2.0",
+    "transformers>=4.44.0",
+    "peft>=0.12.0",
+    "safetensors>=0.4.3",
+    "huggingface-hub>=0.24.0",
+    "numpy>=1.26.0",
+    "fastapi>=0.111.0",
+    "uvicorn>=0.30.0",
+    "pydantic>=2.7.0",
+]
+
+[project.scripts]
+minicpm5-2b-jev-serve = "serve:main"
+minicpm5-2b-jev-eval = "eval_benchmarks:main"
+minicpm5-2b-jev-train = "train:main"
